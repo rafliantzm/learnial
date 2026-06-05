@@ -1,15 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6efe8;
-  --foreground: #2f342f;
-  --panel: rgba(255, 252, 247, 0.82);
-  --panel-strong: rgba(255, 252, 247, 0.96);
-  --line: rgba(128, 112, 94, 0.18);
-  --muted: #706c65;
-  --accent: #6f8f76;
-  --accent-soft: rgba(111, 143, 118, 0.12);
-  --accent-warm: #d18a61;
+  --background: #fdf0f4;
+  --foreground: #352d30;
+  --panel: rgba(255, 243, 247, 0.86);
+  --panel-strong: rgba(255, 247, 244, 0.95);
+  --line: rgba(210, 176, 184, 0.24);
+  --muted: #7b6d72;
+  --accent: #d88ea5;
+  --accent-soft: rgba(216, 142, 165, 0.14);
+  --accent-text: #926879;
+  --accent-warm: #f1dc92;
+  --accent-warm-soft: rgba(241, 220, 146, 0.18);
+  --accent-warm-text: #a78438;
+  --accent-plum: #bea1c9;
+  --accent-plum-soft: rgba(190, 161, 201, 0.16);
+  --accent-plum-text: #8e759c;
+  --accent-ink: #5e4951;
+  --accent-ink-hover: #503c44;
+  --surface-soft: rgba(255, 244, 247, 0.78);
+  --surface-soft-strong: rgba(255, 246, 244, 0.9);
+  --surface-soft-alt: rgba(255, 240, 245, 0.72);
+  --surface-yellow: rgba(241, 220, 146, 0.16);
+  --surface-yellow-strong: rgba(241, 220, 146, 0.22);
 }
 
 * {
@@ -22,9 +35,10 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(209, 138, 97, 0.12), transparent 24%),
-    radial-gradient(circle at top right, rgba(111, 143, 118, 0.14), transparent 28%),
-    linear-gradient(180deg, #f8f1ea 0%, #f4ece5 48%, #efe7df 100%);
+    radial-gradient(circle at top left, rgba(241, 220, 146, 0.24), transparent 23%),
+    radial-gradient(circle at top right, rgba(216, 142, 165, 0.24), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(190, 161, 201, 0.14), transparent 20%),
+    linear-gradient(180deg, #fff1f5 0%, #fdf0f3 42%, #fbeedd 100%);
   color: var(--foreground);
   font-family: var(--font-body-sans), Arial, Helvetica, sans-serif;
 }
@@ -67,7 +81,7 @@ select {
 }
 
 ::selection {
-  background: rgba(111, 143, 118, 0.22);
+  background: rgba(216, 142, 165, 0.22);
   color: var(--foreground);
 }
 
@@ -79,29 +93,29 @@ select {
   background: var(--panel);
   border: 1px solid var(--line);
   box-shadow:
-    0 1px 2px rgba(42, 33, 23, 0.03),
-    0 14px 50px rgba(42, 33, 23, 0.06);
+    0 1px 2px rgba(72, 46, 53, 0.03),
+    0 14px 50px rgba(115, 76, 89, 0.08);
   backdrop-filter: blur(14px);
 }
 
 .surface-panel-strong {
   background: var(--panel-strong);
-  border: 1px solid rgba(128, 112, 94, 0.14);
+  border: 1px solid rgba(210, 176, 184, 0.18);
   box-shadow:
-    0 8px 28px rgba(42, 33, 23, 0.05),
-    0 24px 80px rgba(42, 33, 23, 0.07);
+    0 8px 28px rgba(115, 76, 89, 0.06),
+    0 24px 80px rgba(115, 76, 89, 0.09);
 }
 
 .hairline {
   height: 1px;
   width: 3rem;
-  background: linear-gradient(90deg, rgba(111, 143, 118, 0.8), rgba(111, 143, 118, 0.1));
+  background: linear-gradient(90deg, rgba(216, 142, 165, 0.85), rgba(241, 220, 146, 0.28));
 }
 
 .soft-orb {
   position: absolute;
   border-radius: 9999px;
   filter: blur(12px);
-  opacity: 0.55;
+  opacity: 0.6;
   pointer-events: none;
 }

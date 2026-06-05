@@ -39,17 +39,17 @@ export default function FloatingChat() {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-pink-500 text-white text-3xl shadow-lg hover:bg-pink-600 transition z-50"
+        className="fixed bottom-6 right-6 z-50 h-16 w-16 rounded-full bg-[var(--accent)] text-white text-3xl shadow-[0_18px_40px_rgba(216,142,165,0.34)] transition hover:bg-[#cc7a95]"
       >
         ?
       </button>
 
       {open && (
-        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-3xl shadow-2xl flex flex-col z-50">
+        <div className="surface-panel-strong fixed bottom-24 right-6 z-50 flex h-[500px] w-96 flex-col rounded-3xl shadow-2xl">
 
-          <div className="bg-yellow-100 p-4 rounded-t-3xl">
-            <h2 className="font-bold text-lg">🤖 Learnial AI</h2>
-            <p className="text-sm text-gray-600">Siap membantu belajar</p>
+          <div className="rounded-t-3xl bg-[var(--surface-yellow)] p-4">
+            <h2 className="text-lg font-bold text-[var(--foreground)]">🤖 Learnial AI</h2>
+            <p className="text-sm text-[var(--accent-warm-text)]">Siap membantu belajar</p>
           </div>
 
           <div className="flex-1 p-4 overflow-y-auto flex flex-col gap-2">
@@ -58,33 +58,33 @@ export default function FloatingChat() {
                 key={i}
                 className={`p-3 rounded-xl max-w-[80%] text-sm ${
                   msg.role === "ai"
-                    ? "bg-pink-100 self-start"
-                    : "bg-pink-500 text-white self-end"
+                    ? "self-start bg-[rgba(216,142,165,0.12)] text-[var(--foreground)]"
+                    : "self-end bg-[var(--accent)] text-white"
                 }`}
               >
                 {msg.text}
               </div>
             ))}
             {loading && (
-              <div className="bg-pink-100 p-3 rounded-xl self-start text-sm text-gray-400">
+              <div className="self-start rounded-xl bg-[rgba(216,142,165,0.12)] p-3 text-sm text-[var(--muted)]">
                 Sedang mengetik...
               </div>
             )}
           </div>
 
-          <div className="p-4 border-t flex gap-2">
+          <div className="flex gap-2 border-t border-[rgba(210,176,184,0.18)] p-4">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Ketik pertanyaan..."
-              className="flex-1 border rounded-xl p-2 text-sm"
+              className="flex-1 rounded-xl border border-[rgba(210,176,184,0.18)] bg-[rgba(255,249,246,0.94)] p-2 text-sm text-[var(--foreground)] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(216,142,165,0.28)]"
             />
             <button
               onClick={sendMessage}
               disabled={loading}
-              className="bg-pink-500 text-white px-4 rounded-xl disabled:opacity-50"
+              className="rounded-xl bg-[var(--accent)] px-4 text-white disabled:opacity-50"
             >
               Kirim
             </button>

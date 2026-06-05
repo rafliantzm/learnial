@@ -42,11 +42,11 @@ function getFeatureLabel(feature: HistoryEntry["feature"]) {
 function getFeatureBadgeClass(feature: HistoryEntry["feature"]) {
   switch (feature) {
     case "study":
-      return "border-[rgba(111,143,118,0.18)] bg-[rgba(111,143,118,0.08)] text-[#54685a]"
+      return "border-[rgba(216,142,165,0.2)] bg-[rgba(216,142,165,0.1)] text-[var(--accent-text)]"
     case "flashcard":
-      return "border-[rgba(209,138,97,0.18)] bg-[rgba(209,138,97,0.08)] text-[#8b543f]"
+      return "border-[rgba(241,220,146,0.3)] bg-[rgba(241,220,146,0.18)] text-[var(--accent-warm-text)]"
     case "schedule":
-      return "border-[rgba(127,109,156,0.18)] bg-[rgba(127,109,156,0.08)] text-[#6a5d81]"
+      return "border-[rgba(190,161,201,0.22)] bg-[rgba(190,161,201,0.16)] text-[var(--accent-plum-text)]"
     default:
       return "border-slate-200 bg-slate-100 text-slate-700"
   }
@@ -58,8 +58,8 @@ function renderEntryDetail(entry: HistoryEntry) {
 
     return (
       <div className="grid gap-5">
-        <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/55 p-4">
-          <div className="mb-3 flex items-center gap-2 text-[#6f8f76]">
+        <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] p-4">
+          <div className="mb-3 flex items-center gap-2 text-[var(--accent-text)]">
             <BookText className="h-4 w-4" />
             <p className="text-xs font-semibold uppercase tracking-[0.22em]">
               Ringkasan
@@ -71,8 +71,8 @@ function renderEntryDetail(entry: HistoryEntry) {
         </div>
 
         <div className="grid gap-5 xl:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/55 p-4">
-            <div className="mb-3 flex items-center gap-2 text-[#6f8f76]">
+          <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] p-4">
+            <div className="mb-3 flex items-center gap-2 text-[var(--accent-text)]">
               <LayoutList className="h-4 w-4" />
               <p className="text-xs font-semibold uppercase tracking-[0.22em]">
                 Poin Penting
@@ -82,7 +82,7 @@ function renderEntryDetail(entry: HistoryEntry) {
               {studyEntry.detail.keyPoints.slice(0, 4).map((point, index) => (
                 <li
                   key={`${entry.id}-point-${index}`}
-                  className="rounded-xl bg-[rgba(111,143,118,0.05)] px-3 py-3 text-sm leading-7 text-[#4d524d]"
+                  className="rounded-xl bg-[rgba(216,142,165,0.08)] px-3 py-3 text-sm leading-7 text-[#4d524d]"
                 >
                   {point}
                 </li>
@@ -90,8 +90,8 @@ function renderEntryDetail(entry: HistoryEntry) {
             </ul>
           </div>
 
-          <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/55 p-4">
-            <div className="mb-3 flex items-center gap-2 text-[#6f8f76]">
+          <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] p-4">
+            <div className="mb-3 flex items-center gap-2 text-[var(--accent-text)]">
               <KeyRound className="h-4 w-4" />
               <p className="text-xs font-semibold uppercase tracking-[0.22em]">
                 Kata Kunci
@@ -101,13 +101,13 @@ function renderEntryDetail(entry: HistoryEntry) {
               {studyEntry.detail.keywords.slice(0, 6).map((keyword, index) => (
                 <span
                   key={`${entry.id}-keyword-${index}`}
-                  className="rounded-full border border-[rgba(111,143,118,0.18)] bg-[rgba(111,143,118,0.08)] px-4 py-2 text-sm font-medium text-[#54685a]"
+                  className="rounded-full border border-[rgba(216,142,165,0.2)] bg-[rgba(216,142,165,0.1)] px-4 py-2 text-sm font-medium text-[var(--accent-text)]"
                 >
                   {keyword}
                 </span>
               ))}
             </div>
-            <div className="mt-4 rounded-xl bg-[rgba(209,138,97,0.08)] px-4 py-3 text-sm text-[#8b543f]">
+            <div className="mt-4 rounded-xl bg-[rgba(241,220,146,0.18)] px-4 py-3 text-sm text-[var(--accent-warm-text)]">
               Quiz: {studyEntry.detail.quiz.multipleChoiceCount} pilihan ganda,{" "}
               {studyEntry.detail.quiz.essayCount} essay
             </div>
@@ -122,7 +122,7 @@ function renderEntryDetail(entry: HistoryEntry) {
 
     return (
       <div className="space-y-4">
-        <div className="rounded-[1.5rem] bg-[rgba(209,138,97,0.08)] px-4 py-3 text-sm text-[#8b543f]">
+        <div className="rounded-[1.5rem] bg-[rgba(241,220,146,0.18)] px-4 py-3 text-sm text-[var(--accent-warm-text)]">
           Total flashcard: {flashcardEntry.detail.cardCount}
         </div>
 
@@ -130,9 +130,9 @@ function renderEntryDetail(entry: HistoryEntry) {
           {flashcardEntry.detail.flashcards.map((card, index) => (
             <div
               key={`${entry.id}-flashcard-${index}`}
-              className="rounded-[1.5rem] border border-[rgba(209,138,97,0.14)] bg-white/60 p-4"
+              className="rounded-[1.5rem] border border-[rgba(241,220,146,0.24)] bg-[rgba(255,248,238,0.86)] p-4"
             >
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#c56d54]">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-text)]">
                 Kartu {index + 1}
               </p>
               <p className="font-medium leading-7 text-[#26302b]">{card.q}</p>
@@ -149,18 +149,18 @@ function renderEntryDetail(entry: HistoryEntry) {
   return (
     <div className="space-y-4">
       <p className="text-sm leading-7 text-[#4d524d]">{scheduleEntry.resultText}</p>
-      <div className="rounded-[1.5rem] border border-[rgba(127,109,156,0.14)] bg-white/60 p-4 text-sm text-[#4d524d]">
+      <div className="rounded-[1.5rem] border border-[rgba(190,161,201,0.18)] bg-[var(--surface-soft-strong)] p-4 text-sm text-[#4d524d]">
         <div className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-xl bg-[rgba(127,109,156,0.08)] px-3 py-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-[#7f6d9c]">Hari</p>
+          <div className="rounded-xl bg-[rgba(190,161,201,0.16)] px-3 py-3">
+            <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-plum-text)]">Hari</p>
             <p className="mt-2 font-medium">{scheduleEntry.detail.day}</p>
           </div>
-          <div className="rounded-xl bg-[rgba(111,143,118,0.08)] px-3 py-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-[#6f8f76]">Jam</p>
+          <div className="rounded-xl bg-[rgba(216,142,165,0.1)] px-3 py-3">
+            <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-text)]">Jam</p>
             <p className="mt-2 font-medium">{scheduleEntry.detail.time}</p>
           </div>
-          <div className="rounded-xl bg-[rgba(209,138,97,0.08)] px-3 py-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-[#c56d54]">Email</p>
+          <div className="rounded-xl bg-[rgba(241,220,146,0.18)] px-3 py-3">
+            <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-warm-text)]">Email</p>
             <p className="mt-2 font-medium">
               {scheduleEntry.detail.email || "Tidak diisi"}
             </p>
@@ -194,7 +194,7 @@ export default function HistoryPage() {
     >
       {history.length === 0 ? (
         <div className="surface-panel rounded-[2rem] p-10 text-center">
-          <h2 className="font-display text-4xl font-semibold text-[#26302b]">
+          <h2 className="font-display text-4xl font-semibold text-[var(--foreground)]">
             Belum ada history
           </h2>
           <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
@@ -218,7 +218,7 @@ export default function HistoryPage() {
                     </span>
                   </div>
 
-                  <h2 className="break-words font-display text-[2.3rem] font-semibold leading-tight text-[#26302b]">
+                  <h2 className="break-words font-display text-[2.3rem] font-semibold leading-tight text-[var(--foreground)]">
                     {entry.title}
                   </h2>
                   <p className="mt-2 text-sm text-[#7d776f]">
@@ -227,7 +227,7 @@ export default function HistoryPage() {
                 </div>
               </div>
 
-              <div className="mb-5 rounded-[1.6rem] border border-[rgba(128,112,94,0.12)] bg-white/55 p-4">
+              <div className="mb-5 rounded-[1.6rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] p-4">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
                   Input
                 </p>

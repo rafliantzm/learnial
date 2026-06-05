@@ -125,7 +125,7 @@ function SummaryContent({ summary }: { summary: string }) {
       {sections.map((section, index) => (
         <div
           key={`${section.title}-${index}`}
-          className="rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/55 p-5"
+          className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] p-5"
         >
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
             {section.title}
@@ -141,9 +141,9 @@ function SummaryContent({ summary }: { summary: string }) {
                 return (
                   <div
                     key={lineIndex}
-                    className="rounded-[1.15rem] bg-[rgba(111,143,118,0.06)] px-4 py-3"
+                    className="rounded-[1.15rem] bg-[rgba(216,142,165,0.08)] px-4 py-3"
                   >
-                    <span className="font-semibold text-[#2f3835]">
+                    <span className="font-semibold text-[var(--foreground)]">
                       {line.match(/^\d+/)?.[0]}. {topicTitle}
                     </span>
                     {detailText ? (
@@ -174,10 +174,10 @@ function StudySection({
   return (
     <section className="surface-panel rounded-[1.8rem] p-5 sm:p-6">
       <div className="mb-4 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[rgba(111,143,118,0.1)] text-[#6f8f76]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--accent-soft)] text-[var(--accent-text)]">
           <Icon className="h-5 w-5" />
         </div>
-        <h3 className="font-display text-[1.9rem] font-semibold text-[#26302b]">
+        <h3 className="font-display text-[1.9rem] font-semibold text-[var(--foreground)]">
           {title}
         </h3>
       </div>
@@ -261,21 +261,21 @@ export default function StudyUploader() {
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <div className="surface-panel-strong rounded-[2rem] p-6 sm:p-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-[1.4rem] bg-[rgba(111,143,118,0.12)] text-[#6f8f76]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-[1.4rem] bg-[var(--accent-soft)] text-[var(--accent-text)]">
               <BookText className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#6f8f76]">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-text)]">
                 Input materi
               </p>
-              <h2 className="font-display text-[2rem] font-semibold text-[#26302b]">
+              <h2 className="font-display text-[2rem] font-semibold text-[var(--foreground)]">
                 Unggah dokumen atau tempel teks
               </h2>
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-            <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.14)] bg-white/60 p-4">
+            <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-4">
               <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
                 File pembelajaran
               </label>
@@ -283,7 +283,7 @@ export default function StudyUploader() {
                 type="file"
                 accept=".pdf,.docx,.pptx"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
-                className="block w-full rounded-2xl border border-[rgba(128,112,94,0.18)] bg-white px-4 py-3 text-sm text-[#4d524d] file:mr-4 file:rounded-full file:border-0 file:bg-[rgba(111,143,118,0.1)] file:px-4 file:py-2 file:font-medium file:text-[#506255] hover:file:bg-[rgba(111,143,118,0.16)]"
+                className="block w-full rounded-2xl border border-[rgba(196,165,157,0.18)] bg-white px-4 py-3 text-sm text-[#4d524d] file:mr-4 file:rounded-full file:border-0 file:bg-[rgba(216,142,165,0.12)] file:px-4 file:py-2 file:font-medium file:text-[var(--accent-text)] hover:file:bg-[rgba(216,142,165,0.18)]"
               />
               {file && (
                 <p className="mt-3 text-sm text-[#6b726b]">
@@ -292,7 +292,7 @@ export default function StudyUploader() {
               )}
             </div>
 
-            <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.14)] bg-white/60 p-4">
+            <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-4">
               <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
                 Teks materi
               </label>
@@ -300,12 +300,12 @@ export default function StudyUploader() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Tempel materi di sini untuk diringkas, disusun, dan dijadikan quiz..."
-                className="h-40 w-full rounded-[1.35rem] border border-[rgba(128,112,94,0.18)] bg-white px-4 py-4 text-sm leading-7 text-[#414742] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(111,143,118,0.28)]"
+                className="h-40 w-full rounded-[1.35rem] border border-[rgba(196,165,157,0.18)] bg-white px-4 py-4 text-sm leading-7 text-[#414742] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(216,142,165,0.28)]"
               />
             </div>
 
             {error && (
-              <div className="rounded-[1.4rem] border border-[rgba(209,138,97,0.24)] bg-[rgba(209,138,97,0.12)] px-4 py-3 text-sm text-[#8b543f]">
+              <div className="rounded-[1.4rem] border border-[rgba(241,220,146,0.32)] bg-[rgba(241,220,146,0.18)] px-4 py-3 text-sm text-[var(--accent-warm-text)]">
                 {error}
               </div>
             )}
@@ -314,7 +314,7 @@ export default function StudyUploader() {
               <button
                 type="submit"
                 disabled={loading || (!file && !text)}
-                className="inline-flex items-center gap-2 rounded-full bg-[#2f3835] px-6 py-3 text-sm font-semibold text-[#f8f1ea] shadow-[0_10px_30px_rgba(47,56,53,0.18)] hover:-translate-y-0.5 hover:bg-[#25302c] disabled:cursor-not-allowed disabled:bg-[#bfc3bf]"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-ink)] px-6 py-3 text-sm font-semibold text-[#fff8f4] shadow-[0_10px_30px_rgba(94,73,81,0.22)] hover:-translate-y-0.5 hover:bg-[var(--accent-ink-hover)] disabled:cursor-not-allowed disabled:bg-[#c9c0bf]"
               >
                 <Sparkles className="h-4 w-4" />
                 {loading ? 'Memproses materi...' : 'Ringkas Materi'}
@@ -331,11 +331,11 @@ export default function StudyUploader() {
           {featureNotes.map((item) => (
             <div key={item.title} className="surface-panel rounded-[1.75rem] p-5">
               <div className="flex items-start gap-4">
-                <div className="mt-1 flex h-11 w-11 items-center justify-center rounded-[1.25rem] bg-[rgba(111,143,118,0.1)] text-[#6f8f76]">
+                <div className="mt-1 flex h-11 w-11 items-center justify-center rounded-[1.25rem] bg-[var(--accent-soft)] text-[var(--accent-text)]">
                   <item.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="font-display text-[1.7rem] font-semibold text-[#26302b]">
+                  <p className="font-display text-[1.7rem] font-semibold text-[var(--foreground)]">
                     {item.title}
                   </p>
                   <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
@@ -355,7 +355,7 @@ export default function StudyUploader() {
                 (item) => (
                   <div
                     key={item}
-                    className="rounded-2xl border border-[rgba(128,112,94,0.12)] bg-white/60 px-4 py-3 text-sm font-medium text-[#4d524d]"
+                    className="rounded-2xl border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] px-4 py-3 text-sm font-medium text-[#4d524d]"
                   >
                     {item}
                   </div>
@@ -378,7 +378,7 @@ export default function StudyUploader() {
                 {(result.keyPoints || []).map((point, index) => (
                   <li
                     key={index}
-                    className="rounded-[1.35rem] border border-[rgba(128,112,94,0.12)] bg-white/55 px-4 py-3 text-sm leading-7 text-[#47504a]"
+                    className="rounded-[1.35rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] px-4 py-3 text-sm leading-7 text-[#47504a]"
                   >
                     {point}
                   </li>
@@ -391,7 +391,7 @@ export default function StudyUploader() {
                 {(result.keywords || []).map((keyword, index) => (
                   <span
                     key={index}
-                    className="rounded-full border border-[rgba(111,143,118,0.18)] bg-[rgba(111,143,118,0.08)] px-4 py-2 text-sm font-medium text-[#54685a]"
+                    className="rounded-full border border-[rgba(216,142,165,0.2)] bg-[rgba(216,142,165,0.1)] px-4 py-2 text-sm font-medium text-[var(--accent-text)]"
                   >
                     {keyword}
                   </span>
@@ -401,7 +401,7 @@ export default function StudyUploader() {
           </div>
 
           <StudySection icon={Network} title="Mindmap">
-            <pre className="overflow-x-auto whitespace-pre-wrap rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/55 p-4 font-mono text-sm leading-7 text-[#4a514a]">
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] p-4 font-mono text-sm leading-7 text-[#4a514a]">
               {result.mindmap}
             </pre>
           </StudySection>
@@ -409,14 +409,14 @@ export default function StudyUploader() {
           <StudySection icon={BrainCircuit} title="Quiz Belajar">
             <div className="grid gap-8 xl:grid-cols-2">
               <div>
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#6f8f76]">
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-text)]">
                   Pilihan Ganda
                 </p>
                 <div className="space-y-4">
                   {(result.quiz.multipleChoice || []).map((q, index) => (
                     <div
                       key={index}
-                      className="rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/60 p-4"
+                      className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-4"
                     >
                       <p className="font-medium leading-7 text-[#2f342f]">
                         {index + 1}. {q.question}
@@ -425,7 +425,7 @@ export default function StudyUploader() {
                         {q.options.map((option, optionIndex) => (
                           <label
                             key={optionIndex}
-                            className="flex items-center gap-3 rounded-xl bg-[rgba(111,143,118,0.05)] px-3 py-2 text-sm text-[#4d524d]"
+                            className="flex items-center gap-3 rounded-xl bg-[rgba(216,142,165,0.08)] px-3 py-2 text-sm text-[#4d524d]"
                           >
                             <input type="radio" name={`mc_${index}`} />
                             {option}
@@ -433,10 +433,10 @@ export default function StudyUploader() {
                         ))}
                       </div>
                       <details className="mt-4 text-sm text-[#5f675f]">
-                        <summary className="cursor-pointer font-semibold text-[#6f8f76]">
+                        <summary className="cursor-pointer font-semibold text-[var(--accent-text)]">
                           Lihat jawaban & penjelasan
                         </summary>
-                        <div className="mt-3 rounded-xl bg-[rgba(111,143,118,0.08)] p-3 leading-7">
+                        <div className="mt-3 rounded-xl bg-[rgba(216,142,165,0.12)] p-3 leading-7">
                           <p>
                             <strong>Jawaban:</strong> {q.correctAnswer}
                           </p>
@@ -451,27 +451,27 @@ export default function StudyUploader() {
               </div>
 
               <div>
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#c56d54]">
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-warm-text)]">
                   Essay
                 </p>
                 <div className="space-y-4">
                   {(result.quiz.essay || []).map((q, index) => (
                     <div
                       key={index}
-                      className="rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/60 p-4"
+                      className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-4"
                     >
                       <p className="font-medium leading-7 text-[#2f342f]">
                         {index + 1}. {q.question}
                       </p>
                       <textarea
                         placeholder="Tulis jawaban Anda..."
-                        className="mt-4 h-28 w-full rounded-[1.2rem] border border-[rgba(128,112,94,0.14)] bg-white px-4 py-3 text-sm text-[#444a44] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(111,143,118,0.28)]"
+                        className="mt-4 h-28 w-full rounded-[1.2rem] border border-[rgba(196,165,157,0.16)] bg-white px-4 py-3 text-sm text-[#444a44] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(216,142,165,0.28)]"
                       />
                       <details className="mt-4 text-sm text-[#5f675f]">
-                        <summary className="cursor-pointer font-semibold text-[#c56d54]">
+                        <summary className="cursor-pointer font-semibold text-[var(--accent-warm-text)]">
                           Lihat jawaban & penjelasan
                         </summary>
-                        <div className="mt-3 rounded-xl bg-[rgba(209,138,97,0.08)] p-3 leading-7">
+                        <div className="mt-3 rounded-xl bg-[rgba(241,220,146,0.16)] p-3 leading-7">
                           <p className="font-semibold">Poin jawaban diharapkan:</p>
                           <pre className="mt-2 whitespace-pre-wrap font-mono text-xs leading-6">
                             {q.keyAnswer}
@@ -487,7 +487,7 @@ export default function StudyUploader() {
               </div>
             </div>
 
-            <div className="mt-6 rounded-[1.5rem] border border-[rgba(128,112,94,0.12)] bg-white/55 px-4 py-3 text-sm text-[#6b726b]">
+            <div className="mt-6 rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] px-4 py-3 text-sm text-[#6b726b]">
               Processing time: {result.metadata.processingTime || '-'} • Panjang
               teks: {result.metadata.textLength || 0} karakter
             </div>

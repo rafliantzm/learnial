@@ -91,10 +91,10 @@ export default function SchedulePage() {
     >
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <div className="surface-panel-strong rounded-[2rem] p-6 sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#7f6d9c]">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-plum-text)]">
             Agenda baru
           </p>
-          <h2 className="font-display mt-3 text-[2rem] font-semibold text-[#26302b]">
+          <h2 className="font-display mt-3 text-[2rem] font-semibold text-[var(--foreground)]">
             Tambah kegiatan manual
           </h2>
 
@@ -103,13 +103,13 @@ export default function SchedulePage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Nama kegiatan"
-              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(127,109,156,0.28)]"
+              className="rounded-[1.35rem] border border-[rgba(196,165,157,0.18)] bg-white px-4 py-3 text-sm text-[#434943] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(216,142,165,0.28)]"
             />
 
             <select
               value={day}
               onChange={(e) => setDay(e.target.value)}
-              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none focus:border-[rgba(127,109,156,0.28)]"
+              className="rounded-[1.35rem] border border-[rgba(196,165,157,0.18)] bg-white px-4 py-3 text-sm text-[#434943] outline-none focus:border-[rgba(216,142,165,0.28)]"
             >
               <option value="">Hari</option>
               <option>Senin</option>
@@ -124,7 +124,7 @@ export default function SchedulePage() {
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none focus:border-[rgba(127,109,156,0.28)]"
+              className="rounded-[1.35rem] border border-[rgba(196,165,157,0.18)] bg-white px-4 py-3 text-sm text-[#434943] outline-none focus:border-[rgba(216,142,165,0.28)]"
             />
 
             <input
@@ -132,13 +132,13 @@ export default function SchedulePage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email (opsional)"
-              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(127,109,156,0.28)]"
+              className="rounded-[1.35rem] border border-[rgba(196,165,157,0.18)] bg-white px-4 py-3 text-sm text-[#434943] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(216,142,165,0.28)]"
             />
           </div>
 
           <button
             onClick={handleSave}
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#2f3835] px-6 py-3 text-sm font-semibold text-[#f8f1ea] shadow-[0_10px_30px_rgba(47,56,53,0.18)] hover:-translate-y-0.5 hover:bg-[#25302c]"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--accent-ink)] px-6 py-3 text-sm font-semibold text-[#fff8f4] shadow-[0_10px_30px_rgba(94,73,81,0.22)] hover:-translate-y-0.5 hover:bg-[var(--accent-ink-hover)]"
           >
             <Plus className="h-4 w-4" />
             Simpan Jadwal
@@ -151,27 +151,27 @@ export default function SchedulePage() {
               Ritme agenda
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
-              <div className="rounded-[1.4rem] bg-[rgba(127,109,156,0.08)] p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-[#7f6d9c]">
+              <div className="rounded-[1.4rem] bg-[rgba(190,161,201,0.16)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-plum-text)]">
                   Total agenda
                 </p>
-                <p className="font-display mt-3 text-4xl font-semibold text-[#26302b]">
+                <p className="font-display mt-3 text-4xl font-semibold text-[var(--foreground)]">
                   {scheduleList.length}
                 </p>
               </div>
-              <div className="rounded-[1.4rem] bg-[rgba(111,143,118,0.08)] p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-[#6f8f76]">
+              <div className="rounded-[1.4rem] bg-[rgba(216,142,165,0.09)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-text)]">
                   Dengan email
                 </p>
-                <p className="font-display mt-3 text-4xl font-semibold text-[#26302b]">
+                <p className="font-display mt-3 text-4xl font-semibold text-[var(--foreground)]">
                   {scheduleList.filter((item) => item.email).length}
                 </p>
               </div>
-              <div className="rounded-[1.4rem] bg-[rgba(209,138,97,0.08)] p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-[#c56d54]">
+              <div className="rounded-[1.4rem] bg-[rgba(241,220,146,0.16)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-warm-text)]">
                   Tanpa email
                 </p>
-                <p className="font-display mt-3 text-4xl font-semibold text-[#26302b]">
+                <p className="font-display mt-3 text-4xl font-semibold text-[var(--foreground)]">
                   {scheduleList.filter((item) => !item.email).length}
                 </p>
               </div>
@@ -183,17 +183,17 @@ export default function SchedulePage() {
       <div className="surface-panel mt-6 rounded-[2rem] p-6 sm:p-8">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#7f6d9c]">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-plum-text)]">
               Agenda tersimpan
             </p>
-            <h3 className="font-display mt-2 text-[2rem] font-semibold text-[#26302b]">
+            <h3 className="font-display mt-2 text-[2rem] font-semibold text-[var(--foreground)]">
               Jadwal Saya
             </h3>
           </div>
         </div>
 
         {scheduleList.length === 0 ? (
-          <div className="mt-6 rounded-[1.75rem] border border-dashed border-[rgba(128,112,94,0.18)] bg-[rgba(255,255,255,0.56)] px-6 py-10 text-center text-[var(--muted)]">
+          <div className="mt-6 rounded-[1.75rem] border border-dashed border-[rgba(210,176,184,0.22)] bg-[var(--surface-soft)] px-6 py-10 text-center text-[var(--muted)]">
             Belum ada jadwal.
           </div>
         ) : (
@@ -201,25 +201,25 @@ export default function SchedulePage() {
             {scheduleList.map((item) => (
               <div
                 key={item.id}
-                className="rounded-[1.6rem] border border-[rgba(128,112,94,0.12)] bg-white/68 p-5"
+                className="rounded-[1.6rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-5"
               >
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                   <div>
-                    <p className="font-display text-[1.8rem] font-semibold text-[#26302b]">
+                    <p className="font-display text-[1.8rem] font-semibold text-[var(--foreground)]">
                       {item.title}
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2 text-sm">
-                      <span className="rounded-full bg-[rgba(127,109,156,0.08)] px-3 py-2 text-[#6a5d81]">
+                      <span className="rounded-full bg-[rgba(190,161,201,0.16)] px-3 py-2 text-[var(--accent-plum-text)]">
                         {item.day}
                       </span>
-                      <span className="rounded-full bg-[rgba(111,143,118,0.08)] px-3 py-2 text-[#54685a]">
+                      <span className="rounded-full bg-[rgba(216,142,165,0.1)] px-3 py-2 text-[var(--accent-text)]">
                         {item.time}
                       </span>
                     </div>
                   </div>
 
                   {item.email && (
-                    <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(209,138,97,0.08)] px-4 py-2 text-sm text-[#8b543f]">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(241,220,146,0.18)] px-4 py-2 text-sm text-[var(--accent-warm-text)]">
                       <Mail className="h-4 w-4" />
                       {item.email}
                     </div>

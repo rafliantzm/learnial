@@ -78,21 +78,21 @@ export default function AppWorkspaceShell({
             <div className="flex items-start gap-4">
               <button
                 onClick={() => router.push("/dashboard")}
-                className="mt-1 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(128,112,94,0.16)] bg-white/70 text-[#47504a] hover:-translate-y-0.5 hover:border-[rgba(111,143,118,0.28)] hover:text-[#6f8f76]"
+                className="mt-1 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] text-[var(--muted)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[rgba(255,239,245,0.92)] hover:text-[var(--accent-text)]"
                 title="Kembali ke dashboard"
               >
                 <ArrowLeft className="h-5 w-5" />
               </button>
 
               <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#6f8f76]">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent-text)]">
                   {eyebrow}
                 </p>
                 <div className="mt-3 flex items-center gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-[1.5rem] bg-[rgba(111,143,118,0.12)] text-[#6f8f76]">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-[1.5rem] bg-[var(--accent-soft)] text-[var(--accent-text)]">
                     <PageIcon className="h-7 w-7" />
                   </div>
-                  <h1 className="font-display text-[2.5rem] font-semibold leading-none text-[#28312d] sm:text-5xl">
+                  <h1 className="font-display text-[2.5rem] font-semibold leading-none text-[var(--foreground)] sm:text-5xl">
                     {title}
                   </h1>
                 </div>
@@ -103,7 +103,7 @@ export default function AppWorkspaceShell({
             </div>
 
             <div className="flex flex-col items-start gap-3 lg:items-end">
-              <div className="rounded-full border border-[rgba(111,143,118,0.18)] bg-[rgba(111,143,118,0.08)] px-4 py-2 text-sm text-[#4b5c4f]">
+              <div className="rounded-full border border-[rgba(216,142,165,0.2)] bg-[rgba(216,142,165,0.09)] px-4 py-2 text-sm text-[var(--accent-text)]">
                 Masuk sebagai <span className="font-semibold">{authUser?.name}</span>
               </div>
 
@@ -118,8 +118,8 @@ export default function AppWorkspaceShell({
                     href={item.href}
                     className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium ${
                       isActive
-                        ? "border-[rgba(111,143,118,0.24)] bg-[rgba(111,143,118,0.1)] text-[#4b5c4f]"
-                        : "border-[rgba(128,112,94,0.14)] bg-white/70 text-[#63665f] hover:border-[rgba(111,143,118,0.24)] hover:bg-[rgba(111,143,118,0.08)]"
+                        ? "border-[rgba(216,142,165,0.24)] bg-[rgba(216,142,165,0.1)] text-[var(--accent-text)]"
+                        : "border-[rgba(210,176,184,0.16)] bg-[var(--surface-soft)] text-[var(--muted)] hover:border-[rgba(216,142,165,0.24)] hover:bg-[rgba(255,239,245,0.92)]"
                     }`}
                   >
                     <ItemIcon className="h-4 w-4" />
@@ -129,7 +129,7 @@ export default function AppWorkspaceShell({
               })}
                 <button
                   onClick={handleSignOut}
-                  className="inline-flex items-center gap-2 rounded-full border border-[rgba(209,138,97,0.2)] bg-[rgba(209,138,97,0.08)] px-4 py-2.5 text-sm font-medium text-[#8b543f] hover:bg-[rgba(209,138,97,0.14)]"
+                  className="inline-flex items-center gap-2 rounded-full border border-[rgba(241,220,146,0.32)] bg-[rgba(241,220,146,0.16)] px-4 py-2.5 text-sm font-medium text-[var(--accent-warm-text)] hover:bg-[rgba(241,220,146,0.24)]"
                 >
                   <LogOut className="h-4 w-4" />
                   Keluar

@@ -73,17 +73,17 @@ export default function GoogleSignInCard() {
 
   return (
     <div className="surface-panel-strong w-full max-w-xl rounded-[2.25rem] p-8 text-center sm:p-10">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[1.6rem] bg-[rgba(111,143,118,0.12)] text-[#6f8f76]">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[1.6rem] bg-[var(--accent-soft)] text-[var(--accent-text)]">
         <Sparkles className="h-8 w-8" />
       </div>
 
-      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.28em] text-[#6f8f76]">
+      <p className="mt-6 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent-text)]">
         Learnial access
       </p>
-      <h1 className="font-display mt-3 text-6xl font-semibold leading-none text-[#27302c]">
+      <h1 className="font-display mt-3 text-6xl font-semibold leading-none text-[var(--foreground)]">
         Learnial
       </h1>
-      <p className="mt-4 text-base text-[#5f655f]">
+      <p className="mt-4 text-base text-[var(--muted)]">
         Belajar lebih cerdas, jadwal lebih rapi.
       </p>
 
@@ -93,7 +93,7 @@ export default function GoogleSignInCard() {
       </p>
 
       {error && (
-        <div className="mt-6 flex items-start gap-3 rounded-[1.4rem] border border-[rgba(209,138,97,0.24)] bg-[rgba(209,138,97,0.12)] px-4 py-3 text-left text-sm text-[#8b543f]">
+        <div className="mt-6 flex items-start gap-3 rounded-[1.4rem] border border-[rgba(241,220,146,0.34)] bg-[rgba(241,220,146,0.18)] px-4 py-3 text-left text-sm text-[var(--accent-warm-text)]">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -102,7 +102,7 @@ export default function GoogleSignInCard() {
       <button
         onClick={handleGoogleLogin}
         disabled={submitting}
-        className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full border border-[rgba(128,112,94,0.14)] bg-white px-6 py-4 text-sm font-semibold text-[#38413d] shadow-[0_14px_40px_rgba(42,33,23,0.08)] hover:-translate-y-0.5 hover:border-[rgba(111,143,118,0.24)] disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full border border-[rgba(216,142,165,0.2)] bg-[rgba(255,248,245,0.96)] px-6 py-4 text-sm font-semibold text-[var(--foreground)] shadow-[0_14px_40px_rgba(115,76,89,0.1)] hover:-translate-y-0.5 hover:border-[rgba(216,142,165,0.32)] hover:bg-[rgba(255,241,246,0.96)] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <GoogleIcon />
         {submitting ? "Mengalihkan ke Google..." : "Lanjutkan dengan Google"}

@@ -105,10 +105,10 @@ export default function FlashcardPage() {
     >
       <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
         <div className="surface-panel-strong rounded-[2rem] p-6 sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#c56d54]">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent-text)]">
             Input materi
           </p>
-          <h2 className="font-display mt-3 text-[2rem] font-semibold text-[#26302b]">
+          <h2 className="font-display mt-3 text-[2rem] font-semibold text-[var(--foreground)]">
             Buat set flashcard dari dokumen atau teks
           </h2>
           <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
@@ -117,7 +117,7 @@ export default function FlashcardPage() {
           </p>
 
           <div className="mt-8 space-y-5">
-            <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.14)] bg-white/60 p-4">
+            <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-4">
               <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
                 File pembelajaran
               </label>
@@ -125,7 +125,7 @@ export default function FlashcardPage() {
                 type="file"
                 accept=".pdf,.docx,.pptx"
                 onChange={(e) => setFile(e.target.files?.[0] || null)}
-                className="block w-full rounded-2xl border border-[rgba(128,112,94,0.18)] bg-white px-4 py-3 text-sm text-[#4d524d] file:mr-4 file:rounded-full file:border-0 file:bg-[rgba(209,138,97,0.1)] file:px-4 file:py-2 file:font-medium file:text-[#8b543f] hover:file:bg-[rgba(209,138,97,0.16)]"
+                className="block w-full rounded-2xl border border-[rgba(196,165,157,0.18)] bg-white px-4 py-3 text-sm text-[#4d524d] file:mr-4 file:rounded-full file:border-0 file:bg-[rgba(241,220,146,0.18)] file:px-4 file:py-2 file:font-medium file:text-[var(--accent-warm-text)] hover:file:bg-[rgba(241,220,146,0.26)]"
               />
               {file && (
                 <p className="mt-3 text-sm text-[#6b726b]">
@@ -134,7 +134,7 @@ export default function FlashcardPage() {
               )}
             </div>
 
-            <div className="rounded-[1.5rem] border border-[rgba(128,112,94,0.14)] bg-white/60 p-4">
+            <div className="rounded-[1.5rem] border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] p-4">
               <label className="mb-3 block text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
                 Teks materi
               </label>
@@ -142,12 +142,12 @@ export default function FlashcardPage() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Tempel materi di sini untuk dipecah menjadi kartu tanya-jawab..."
-                className="h-44 w-full rounded-[1.35rem] border border-[rgba(128,112,94,0.18)] bg-white px-4 py-4 text-sm leading-7 text-[#414742] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(209,138,97,0.28)]"
+                className="h-44 w-full rounded-[1.35rem] border border-[rgba(196,165,157,0.18)] bg-white px-4 py-4 text-sm leading-7 text-[#414742] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(216,142,165,0.28)]"
               />
             </div>
 
             {error && (
-              <div className="rounded-[1.4rem] border border-[rgba(209,138,97,0.24)] bg-[rgba(209,138,97,0.12)] px-4 py-3 text-sm text-[#8b543f]">
+              <div className="rounded-[1.4rem] border border-[rgba(241,220,146,0.32)] bg-[rgba(241,220,146,0.18)] px-4 py-3 text-sm text-[var(--accent-warm-text)]">
                 {error}
               </div>
             )}
@@ -155,7 +155,7 @@ export default function FlashcardPage() {
             <button
               onClick={handleGenerate}
               disabled={loading}
-              className="inline-flex items-center gap-2 rounded-full bg-[#2f3835] px-6 py-3 text-sm font-semibold text-[#f8f1ea] shadow-[0_10px_30px_rgba(47,56,53,0.18)] hover:-translate-y-0.5 hover:bg-[#25302c] disabled:cursor-not-allowed disabled:bg-[#bfc3bf]"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-ink)] px-6 py-3 text-sm font-semibold text-[#fff8f4] shadow-[0_10px_30px_rgba(94,73,81,0.22)] hover:-translate-y-0.5 hover:bg-[var(--accent-ink-hover)] disabled:cursor-not-allowed disabled:bg-[#c9c0bf]"
             >
               <NotebookPen className="h-4 w-4" />
               {loading ? "Menyusun flashcard..." : "Buat Flashcard"}
@@ -170,11 +170,11 @@ export default function FlashcardPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#8c877e]">
                   Preview
                 </p>
-                <h3 className="font-display mt-2 text-[2rem] font-semibold text-[#26302b]">
+                <h3 className="font-display mt-2 text-[2rem] font-semibold text-[var(--foreground)]">
                   Flashcard interaktif
                 </h3>
               </div>
-              <div className="rounded-full border border-[rgba(209,138,97,0.18)] bg-[rgba(209,138,97,0.08)] px-4 py-2 text-sm text-[#8b543f]">
+              <div className="rounded-full border border-[rgba(241,220,146,0.32)] bg-[rgba(241,220,146,0.18)] px-4 py-2 text-sm text-[var(--accent-warm-text)]">
                 {flashcards.length > 0 ? `${index + 1} / ${flashcards.length}` : "Belum ada kartu"}
               </div>
             </div>
@@ -183,15 +183,15 @@ export default function FlashcardPage() {
               onClick={() => flashcards.length > 0 && setFlipped(!flipped)}
               className={`mt-6 min-h-[20rem] rounded-[2rem] border p-8 transition-all ${
                 flashcards.length === 0
-                  ? "border-dashed border-[rgba(128,112,94,0.18)] bg-[rgba(255,255,255,0.56)]"
-                  : flipped
-                    ? "cursor-pointer border-[rgba(209,138,97,0.18)] bg-[rgba(209,138,97,0.08)] shadow-[0_18px_50px_rgba(209,138,97,0.08)]"
-                    : "cursor-pointer border-[rgba(128,112,94,0.12)] bg-white/70 shadow-[0_18px_50px_rgba(42,33,23,0.06)]"
+                  ? "border-dashed border-[rgba(210,176,184,0.22)] bg-[var(--surface-soft)]"
+                    : flipped
+                    ? "cursor-pointer border-[rgba(241,220,146,0.28)] bg-[rgba(241,220,146,0.16)] shadow-[0_18px_50px_rgba(241,220,146,0.14)]"
+                    : "cursor-pointer border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft-strong)] shadow-[0_18px_50px_rgba(115,76,89,0.08)]"
               }`}
             >
               {flashcards.length === 0 ? (
                 <div className="flex h-full min-h-[14rem] flex-col items-center justify-center text-center">
-                  <p className="font-display text-4xl font-semibold text-[#26302b]">
+                  <p className="font-display text-4xl font-semibold text-[var(--foreground)]">
                     Kartu akan muncul di sini
                   </p>
                   <p className="mt-4 max-w-md text-sm leading-7 text-[var(--muted)]">
@@ -205,7 +205,7 @@ export default function FlashcardPage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8c877e]">
                       Pertanyaan
                     </p>
-                    <h4 className="font-display mt-5 text-4xl font-semibold leading-tight text-[#26302b]">
+                    <h4 className="font-display mt-5 text-4xl font-semibold leading-tight text-[var(--foreground)]">
                       {flashcards[index].q}
                     </h4>
                   </div>
@@ -216,7 +216,7 @@ export default function FlashcardPage() {
               ) : (
                 <div className="flex min-h-[14rem] flex-col justify-between">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#c56d54]">
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent-text)]">
                       Jawaban
                     </p>
                     <p className="mt-5 text-lg leading-9 text-[#4f5550]">
@@ -234,7 +234,7 @@ export default function FlashcardPage() {
               <button
                 onClick={prev}
                 disabled={index === 0}
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(128,112,94,0.14)] bg-white/70 px-4 py-2.5 text-sm font-medium text-[#55605a] hover:border-[rgba(111,143,118,0.24)] disabled:cursor-not-allowed disabled:opacity-40"
+                className="inline-flex items-center gap-2 rounded-full border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] px-4 py-2.5 text-sm font-medium text-[var(--muted)] hover:border-[rgba(216,142,165,0.24)] hover:bg-[rgba(255,239,245,0.92)] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <ChevronLeft className="h-4 w-4" />
                 Sebelumnya
@@ -242,7 +242,7 @@ export default function FlashcardPage() {
               <button
                 onClick={() => setFlipped(!flipped)}
                 disabled={flashcards.length === 0}
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(209,138,97,0.18)] bg-[rgba(209,138,97,0.08)] px-4 py-2.5 text-sm font-medium text-[#8b543f] disabled:cursor-not-allowed disabled:opacity-40"
+                className="inline-flex items-center gap-2 rounded-full border border-[rgba(241,220,146,0.3)] bg-[rgba(241,220,146,0.18)] px-4 py-2.5 text-sm font-medium text-[var(--accent-warm-text)] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <RefreshCcw className="h-4 w-4" />
                 Balik kartu
@@ -250,7 +250,7 @@ export default function FlashcardPage() {
               <button
                 onClick={next}
                 disabled={index === flashcards.length - 1 || flashcards.length === 0}
-                className="inline-flex items-center gap-2 rounded-full bg-[#2f3835] px-4 py-2.5 text-sm font-medium text-[#f8f1ea] hover:bg-[#25302c] disabled:cursor-not-allowed disabled:bg-[#bfc3bf]"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-ink)] px-4 py-2.5 text-sm font-medium text-[#fff8f4] hover:bg-[var(--accent-ink-hover)] disabled:cursor-not-allowed disabled:bg-[#c9c0bf]"
               >
                 Berikutnya
                 <ChevronRight className="h-4 w-4" />
@@ -260,7 +260,7 @@ export default function FlashcardPage() {
             {flashcards.length > 0 && (
               <div className="mt-6 h-2 rounded-full bg-[rgba(128,112,94,0.1)]">
                 <div
-                  className="h-2 rounded-full bg-[linear-gradient(90deg,#d18a61,#6f8f76)] transition-all"
+                  className="h-2 rounded-full bg-[linear-gradient(90deg,#f1dc92,#d88ea5)] transition-all"
                   style={{ width: `${((index + 1) / flashcards.length) * 100}%` }}
                 />
               </div>
