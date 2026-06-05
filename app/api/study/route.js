@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 import mammoth from "mammoth"
-import Groq from "groq-sdk"
+import { generateGeminiContent, parseJsonResponse } from "@/lib/gemini"
 
 export const runtime = "nodejs"
 
@@ -9,24 +9,6 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
-
-const groqApiKey = process.env.GROQ_API_KEY
-
-if (!groqApiKey) {
-  throw new Error("GROQ_API_KEY tidak ditemukan di .env.local")
-}
-
-const groq = new Groq({ apiKey: groqApiKey })
-
-async function callGroq(prompt, maxTokens = 1000) {
-  const completion = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
-    temperature: 0.5,
-    max_tokens: maxTokens,
-    messages: [{ role: "user", content: prompt }],
-  })
-  return completion?.choices?.[0]?.message?.content || ""
-}
 
 async function extractText(file) {
   try {
@@ -73,27 +55,40 @@ async function extractText(file) {
 
 async function generateSummary(text) {
   try {
-    return await callGroq(
-      `Buatkan ringkasan singkat dan jelas dari teks berikut dalam bahasa Indonesia.
+    return await generateGeminiContent({
+      prompt: `Buatkan ringkasan materi berikut dalam bahasa Indonesia yang rapi, jelas, dan mudah dipindai.
 
-Ringkasan harus:
+Aturan format:
 - Maksimal 300 kata
-- Mencakup ide utama
-- Gunakan bahasa sederhana
+- Jangan gunakan markdown seperti **bold**, bullet markdown, atau tabel
+- Gunakan format teks biasa dengan baris baru yang jelas
+- Susun persis seperti ini:
+
+Gambaran Umum:
+[1 paragraf singkat]
+
+Topik Utama:
+1. [Topik pertama] - [penjelasan singkat]
+2. [Topik kedua] - [penjelasan singkat]
+3. [Topik ketiga] - [penjelasan singkat jika ada]
+
+Kesimpulan:
+[1 kalimat penutup]
 
 TEKS:
 ${text}`,
-      1024
-    )
+      maxOutputTokens: 1024,
+    })
   } catch (err) {
-    console.error("❌ GROQ SUMMARY ERROR:", err.message)
+    console.error("❌ GEMINI SUMMARY ERROR:", err.message)
     throw new Error(`AI Summary gagal: ${err.message}`)
   }
 }
 
 async function generateKeyPoints(text) {
   try {
-    const response = await callGroq(
+    const response = await generateGeminiContent({
+      prompt:
       `Ekstrak poin-poin penting dan kata kunci dari teks berikut.
 
 Balas hanya JSON valid:
@@ -105,19 +100,20 @@ Balas hanya JSON valid:
 
 TEKS:
 ${text}`,
-      800
-    )
-    const jsonMatch = response.match(/\{[\s\S]*\}/)
-    return jsonMatch ? JSON.parse(jsonMatch[0]) : { keyPoints: [], keywords: [] }
+      maxOutputTokens: 800,
+      responseMimeType: "application/json",
+    })
+    return parseJsonResponse(response, { keyPoints: [], keywords: [] })
   } catch (err) {
-    console.error("❌ GROQ KEY POINTS ERROR:", err.message)
+    console.error("❌ GEMINI KEY POINTS ERROR:", err.message)
     return { keyPoints: [], keywords: [] }
   }
 }
 
 async function generateMindmap(text) {
   try {
-    return await callGroq(
+    return await generateGeminiContent({
+      prompt:
       `Buatkan mindmap struktur topik dari teks berikut dalam format text/ASCII.
 
 Format:
@@ -129,17 +125,18 @@ Format:
 
 TEKS:
 ${text.slice(0, 2000)}`,
-      600
-    )
+      maxOutputTokens: 600,
+    })
   } catch (err) {
-    console.error("❌ GROQ MINDMAP ERROR:", err.message)
+    console.error("❌ GEMINI MINDMAP ERROR:", err.message)
     return "Mindmap tidak tersedia"
   }
 }
 
 async function generateQuiz(text) {
   try {
-    const response = await callGroq(
+    const response = await generateGeminiContent({
+      prompt:
       `Buatkan soal kuis dari materi berikut.
 
 Balas hanya JSON valid:
@@ -171,12 +168,12 @@ BUAT:
 
 MATERI:
 ${text.slice(0, 3000)}`,
-      2000
-    )
-    const jsonMatch = response.match(/\{[\s\S]*\}/)
-    return jsonMatch ? JSON.parse(jsonMatch[0]) : { multipleChoice: [], essay: [] }
+      maxOutputTokens: 2000,
+      responseMimeType: "application/json",
+    })
+    return parseJsonResponse(response, { multipleChoice: [], essay: [] })
   } catch (err) {
-    console.error("❌ GROQ QUIZ ERROR:", err.message)
+    console.error("❌ GEMINI QUIZ ERROR:", err.message)
     return { multipleChoice: [], essay: [] }
   }
 }

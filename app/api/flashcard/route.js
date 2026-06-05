@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server"
-import Groq from "groq-sdk"
 import mammoth from "mammoth"
+import { generateGeminiContent, parseJsonResponse } from "@/lib/gemini"
 
 export const runtime = "nodejs"
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
 
 async function extractText(file) {
   const buffer = Buffer.from(await file.arrayBuffer())
@@ -63,14 +61,8 @@ export async function POST(req) {
       )
     }
 
-    const completion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      temperature: 0.5,
-      max_tokens: 2000,
-      messages: [
-        {
-          role: "user",
-          content: `Buatkan 10 flashcard dari materi berikut dalam bahasa Indonesia.
+    const raw = await generateGeminiContent({
+      prompt: `Buatkan 10 flashcard dari materi berikut dalam bahasa Indonesia.
 
 Balas HANYA JSON valid seperti ini, tanpa teks lain:
 
@@ -82,28 +74,17 @@ Balas HANYA JSON valid seperti ini, tanpa teks lain:
 
 MATERI:
 ${finalText.slice(0, 4000)}`,
-        },
-      ],
+      maxOutputTokens: 2000,
+      responseMimeType: "application/json",
     })
-
-    const raw = completion?.choices?.[0]?.message?.content || ""
-    const jsonMatch = raw.match(/\{[\s\S]*\}/)
-
-    if (!jsonMatch) {
-      return NextResponse.json(
-        { success: false, error: "AI gagal generate flashcard" },
-        { status: 500 }
-      )
-    }
-
-    const parsed = JSON.parse(jsonMatch[0])
+    const parsed = parseJsonResponse(raw, { flashcards: [] })
 
     return NextResponse.json({
       success: true,
       flashcards: parsed.flashcards || [],
     })
   } catch (error) {
-    console.error("❌ FLASHCARD ERROR:", error.message)
+    console.error("❌ GEMINI FLASHCARD ERROR:", error.message)
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }

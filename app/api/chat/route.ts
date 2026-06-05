@@ -1,31 +1,20 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server"
+import { generateGeminiContent } from "@/lib/gemini"
 
 export async function POST(req: NextRequest) {
   try {
-    const { message } = await req.json();
+    const { message } = await req.json()
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: "Kamu adalah Learnial AI, asisten belajar yang ramah. Jawab dalam Bahasa Indonesia." },
-          { role: "user", content: message },
-        ],
-      }),
-    });
+    const text = await generateGeminiContent({
+      systemInstruction:
+        "Kamu adalah Learnial AI, asisten belajar yang ramah. Jawab dalam Bahasa Indonesia.",
+      prompt: message,
+      maxOutputTokens: 1024,
+    })
 
-    const data = await response.json();
-    console.log("GROQ RESPONSE:", JSON.stringify(data));
-    const text = data.choices?.[0]?.message?.content ?? "Maaf, tidak ada respons.";
-    return NextResponse.json({ text });
-
+    return NextResponse.json({ text })
   } catch (error) {
-    console.error("ERROR:", error);
-    return NextResponse.json({ text: "Error: " + error });
+    console.error("ERROR:", error)
+    return NextResponse.json({ text: "Error: " + error })
   }
 }

@@ -1,16 +1,49 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
+import { useEffect, useState } from "react"
+import {
+  BookText,
+  CalendarClock,
+  History,
+  Mail,
+  NotebookPen,
+  Plus,
+} from "lucide-react"
+import AppWorkspaceShell from "@/components/AppWorkspaceShell"
+import {
+  getCurrentUserName,
+  getStoredSchedules,
+  saveHistoryEntry,
+  saveScheduleItem,
+  ScheduleItem,
+} from "@/lib/history"
+
+const navigation = [
+  { href: "/study", icon: BookText, label: "Study" },
+  { href: "/flashcard", icon: NotebookPen, label: "Flashcard" },
+  { href: "/schedule", icon: CalendarClock, label: "Schedule" },
+  { href: "/history", icon: History, label: "History" },
+]
 
 export default function SchedulePage() {
-  const router = useRouter()
   const [title, setTitle] = useState("")
   const [day, setDay] = useState("")
   const [time, setTime] = useState("")
   const [email, setEmail] = useState("")
-  const [scheduleList, setScheduleList] = useState<any[]>([])
+  const [scheduleList, setScheduleList] = useState<ScheduleItem[]>([])
+
+  useEffect(() => {
+    const syncSchedules = () => {
+      setScheduleList(getStoredSchedules())
+    }
+
+    queueMicrotask(syncSchedules)
+    window.addEventListener("focus", syncSchedules)
+
+    return () => {
+      window.removeEventListener("focus", syncSchedules)
+    }
+  }, [])
 
   const handleSave = () => {
     if (!title || !day || !time) {
@@ -18,8 +51,29 @@ export default function SchedulePage() {
       return
     }
 
-    const newItem = { title, day, time, email }
-    setScheduleList([...scheduleList, newItem])
+    const nextSchedules = saveScheduleItem({
+      title,
+      day,
+      time,
+      email,
+    })
+
+    saveHistoryEntry({
+      feature: "schedule",
+      title,
+      userName: getCurrentUserName(),
+      inputText: `${title} pada ${day} pukul ${time}`,
+      resultText: email
+        ? `Jadwal tersimpan dengan email pengingat ke ${email}`
+        : "Jadwal tersimpan tanpa email pengingat",
+      detail: {
+        day,
+        time,
+        email,
+      },
+    })
+
+    setScheduleList(nextSchedules)
     setTitle("")
     setDay("")
     setTime("")
@@ -27,113 +81,155 @@ export default function SchedulePage() {
   }
 
   return (
-    <div className="min-h-screen bg-pink-50 relative p-10">
+    <AppWorkspaceShell
+      eyebrow="Planner workspace"
+      title="Smart Schedule Planner"
+      subtitle="Kelola agenda belajar dan kegiatan kuliah dalam panel yang lebih terstruktur, hangat, dan cepat dipindai."
+      icon={CalendarClock}
+      currentPath="/schedule"
+      navigation={navigation}
+    >
+      <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="surface-panel-strong rounded-[2rem] p-6 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#7f6d9c]">
+            Agenda baru
+          </p>
+          <h2 className="font-display mt-3 text-[2rem] font-semibold text-[#26302b]">
+            Tambah kegiatan manual
+          </h2>
 
-      {/* TOMBOL POJOK KANAN ATAS */}
-      <div className="fixed top-6 right-6 flex gap-4 z-40">
-  <button
-    onClick={() => router.back()}
-    className="text-4xl hover:scale-125 transition-transform duration-200 hover:bg-pink-200 p-2 rounded-lg cursor-pointer"
-    title="Kembali"
-  >
-    ←
-  </button>
-        <Link
-          href="/history"
-          className="text-4xl hover:scale-125 transition-transform duration-200 hover:bg-pink-200 p-2 rounded-lg"
-          title="History"
-        >
-          📃
-        </Link>
-      </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Nama kegiatan"
+              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(127,109,156,0.28)]"
+            />
 
-      <h1 className="text-4xl font-bold mb-2">
-        📅 Smart Schedule Planner
-      </h1>
+            <select
+              value={day}
+              onChange={(e) => setDay(e.target.value)}
+              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none focus:border-[rgba(127,109,156,0.28)]"
+            >
+              <option value="">Hari</option>
+              <option>Senin</option>
+              <option>Selasa</option>
+              <option>Rabu</option>
+              <option>Kamis</option>
+              <option>Jumat</option>
+              <option>Sabtu</option>
+            </select>
 
-      <p className="text-gray-600 mb-8">
-        Kelola jadwal kuliah dan aktivitasmu.
-      </p>
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none focus:border-[rgba(127,109,156,0.28)]"
+            />
 
-      {/* FORM */}
-      <div className="bg-white p-6 rounded-3xl shadow">
-        <h2 className="text-2xl font-semibold mb-4">
-          Tambah Kegiatan Manual
-        </h2>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email (opsional)"
+              className="rounded-[1.35rem] border border-[rgba(128,112,94,0.16)] bg-white px-4 py-3 text-sm text-[#434943] outline-none placeholder:text-[#aaa49b] focus:border-[rgba(127,109,156,0.28)]"
+            />
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Nama Kegiatan"
-            className="border p-3 rounded-xl"
-          />
-
-          <select
-            value={day}
-            onChange={(e) => setDay(e.target.value)}
-            className="border p-3 rounded-xl"
+          <button
+            onClick={handleSave}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#2f3835] px-6 py-3 text-sm font-semibold text-[#f8f1ea] shadow-[0_10px_30px_rgba(47,56,53,0.18)] hover:-translate-y-0.5 hover:bg-[#25302c]"
           >
-            <option value="">Hari</option>
-            <option>Senin</option>
-            <option>Selasa</option>
-            <option>Rabu</option>
-            <option>Kamis</option>
-            <option>Jumat</option>
-            <option>Sabtu</option>
-          </select>
-
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            className="border p-3 rounded-xl"
-          />
-
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email (opsional)"
-            className="border p-3 rounded-xl"
-          />
+            <Plus className="h-4 w-4" />
+            Simpan Jadwal
+          </button>
         </div>
 
-        <button
-          onClick={handleSave}
-          className="mt-6 bg-pink-500 text-white px-6 py-3 rounded-xl"
-        >
-          Simpan Jadwal
-        </button>
+        <div className="grid gap-4">
+          <div className="surface-panel rounded-[1.75rem] p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c877e]">
+              Ritme agenda
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
+              <div className="rounded-[1.4rem] bg-[rgba(127,109,156,0.08)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-[#7f6d9c]">
+                  Total agenda
+                </p>
+                <p className="font-display mt-3 text-4xl font-semibold text-[#26302b]">
+                  {scheduleList.length}
+                </p>
+              </div>
+              <div className="rounded-[1.4rem] bg-[rgba(111,143,118,0.08)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-[#6f8f76]">
+                  Dengan email
+                </p>
+                <p className="font-display mt-3 text-4xl font-semibold text-[#26302b]">
+                  {scheduleList.filter((item) => item.email).length}
+                </p>
+              </div>
+              <div className="rounded-[1.4rem] bg-[rgba(209,138,97,0.08)] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-[#c56d54]">
+                  Tanpa email
+                </p>
+                <p className="font-display mt-3 text-4xl font-semibold text-[#26302b]">
+                  {scheduleList.filter((item) => !item.email).length}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* LIST */}
-      <div className="bg-white p-6 rounded-3xl shadow mt-8">
-        <h2 className="text-xl font-semibold mb-4">
-          Jadwal Saya
-        </h2>
+      <div className="surface-panel mt-6 rounded-[2rem] p-6 sm:p-8">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#7f6d9c]">
+              Agenda tersimpan
+            </p>
+            <h3 className="font-display mt-2 text-[2rem] font-semibold text-[#26302b]">
+              Jadwal Saya
+            </h3>
+          </div>
+        </div>
 
         {scheduleList.length === 0 ? (
-          <p className="text-gray-400">Belum ada jadwal</p>
+          <div className="mt-6 rounded-[1.75rem] border border-dashed border-[rgba(128,112,94,0.18)] bg-[rgba(255,255,255,0.56)] px-6 py-10 text-center text-[var(--muted)]">
+            Belum ada jadwal.
+          </div>
         ) : (
-          <div className="space-y-3">
-            {scheduleList.map((item, i) => (
-              <div key={i} className="border p-4 rounded-xl">
-                <p className="font-bold">{item.title}</p>
-                <p className="text-sm text-gray-500">
-                  {item.day} - {item.time}
-                </p>
-                {item.email && (
-                  <p className="text-sm text-gray-400">
-                    📧 {item.email}
-                  </p>
-                )}
+          <div className="mt-6 grid gap-4">
+            {scheduleList.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-[1.6rem] border border-[rgba(128,112,94,0.12)] bg-white/68 p-5"
+              >
+                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                  <div>
+                    <p className="font-display text-[1.8rem] font-semibold text-[#26302b]">
+                      {item.title}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2 text-sm">
+                      <span className="rounded-full bg-[rgba(127,109,156,0.08)] px-3 py-2 text-[#6a5d81]">
+                        {item.day}
+                      </span>
+                      <span className="rounded-full bg-[rgba(111,143,118,0.08)] px-3 py-2 text-[#54685a]">
+                        {item.time}
+                      </span>
+                    </div>
+                  </div>
+
+                  {item.email && (
+                    <div className="inline-flex items-center gap-2 rounded-full bg-[rgba(209,138,97,0.08)] px-4 py-2 text-sm text-[#8b543f]">
+                      <Mail className="h-4 w-4" />
+                      {item.email}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         )}
       </div>
-
-    </div>
+    </AppWorkspaceShell>
   )
 }

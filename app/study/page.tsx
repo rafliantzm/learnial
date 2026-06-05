@@ -1,44 +1,32 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
-import StudyUploader from '@/components/StudyUploader'
-import Link from 'next/link'
+import {
+  BookText,
+  CalendarClock,
+  History,
+  NotebookPen,
+} from "lucide-react"
+import AppWorkspaceShell from "@/components/AppWorkspaceShell"
+import StudyUploader from "@/components/StudyUploader"
+
+const navigation = [
+  { href: "/study", icon: BookText, label: "Study" },
+  { href: "/flashcard", icon: NotebookPen, label: "Flashcard" },
+  { href: "/schedule", icon: CalendarClock, label: "Schedule" },
+  { href: "/history", icon: History, label: "History" },
+]
 
 export default function StudyPage() {
-  const router = useRouter()
-
   return (
-    <div className="min-h-screen bg-pink-50 relative">
-      {/* Back Button */}
-      <button
-        onClick={() => router.push("/dashboard")}
-        className="fixed top-6 left-6 text-4xl hover:scale-125 transition-transform duration-200 cursor-pointer z-40"
-        title="Kembali ke Dashboard"
-      >
-        ←
-      </button>
-
-      {/* Emoji Navigation */}
-      <div className="fixed top-6 right-6 flex gap-4 z-40">
-        <Link href="/flashcard" className="text-4xl hover:scale-125 transition-transform duration-200 hover:bg-pink-200 p-2 rounded-lg" title="Flashcard Generator">📝</Link>
-        <Link href="/schedule" className="text-4xl hover:scale-125 transition-transform duration-200 hover:bg-pink-200 p-2 rounded-lg" title="Schedule Optimizer">🗓️</Link>
-        <Link href="/history" className="text-4xl hover:scale-125 transition-transform duration-200 hover:bg-pink-200 p-2 rounded-lg" title="Riwayat Belajar">📃</Link>
-      </div>
-
-      {/* MAIN CONTENT */}
-      <div className="max-w-4xl mx-auto px-4 pb-10">
-        <div className="text-center py-8">
-          <h1 className="text-4xl font-bold text-gray-800">🎓 AI Study Assistant</h1>
-          <p className="text-gray-600 mt-2">
-            Ringkas materi, generate quiz, dan buat mindmap otomatis dengan AI
-          </p>
-        </div>
-
-        {/* Bubble Putih */}
-        <div className="bg-white rounded-3xl shadow-lg p-6">
-          <StudyUploader />
-        </div>
-      </div>
-    </div>
+    <AppWorkspaceShell
+      eyebrow="Learning assistant"
+      title="AI Study Assistant"
+      subtitle="Ringkas materi, identifikasi poin penting, hasilkan mindmap, dan siapkan quiz belajar dalam satu alur yang lebih nyaman dibaca."
+      icon={BookText}
+      currentPath="/study"
+      navigation={navigation}
+    >
+      <StudyUploader />
+    </AppWorkspaceShell>
   )
 }
