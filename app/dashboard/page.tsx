@@ -97,7 +97,7 @@ const featureCards = [
       "Ubah materi kuliah menjadi flashcard interaktif untuk membantu proses belajar dan menghafal.",
     cta: "Buat flashcard",
     icon: NotebookPen,
-    accent: "text-[var(--accent-warm-text)]",
+    accent: "text-[var(--accent-text)]",
     badge: "Recall mode",
   },
   {
@@ -108,7 +108,7 @@ const featureCards = [
       "Upload jadwal kuliah atau tambah kegiatan dan dapatkan pengingat otomatis melalui email.",
     cta: "Atur jadwal",
     icon: CalendarClock,
-    accent: "text-[var(--accent-plum-text)]",
+    accent: "text-[var(--accent-text)]",
     badge: "Planner",
   },
 ] as const
@@ -270,7 +270,7 @@ export default function Dashboard() {
                         className={`rounded-[1.5rem] border border-[rgba(255,250,246,0.7)] bg-gradient-to-br ${card.tone} p-4`}
                       >
                         <div className="flex items-center justify-between">
-                          <card.icon className="h-5 w-5 text-[var(--foreground)]" />
+                          <card.icon className="h-5 w-5 text-[var(--accent-text)]" />
                           <span className="text-[0.68rem] uppercase tracking-[0.24em] text-[#8c877e]">
                             {card.suffix}
                           </span>

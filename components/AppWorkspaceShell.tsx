@@ -78,7 +78,7 @@ export default function AppWorkspaceShell({
             <div className="flex items-start gap-4">
               <button
                 onClick={() => router.push("/dashboard")}
-                className="mt-1 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] text-[var(--muted)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[rgba(255,239,245,0.92)] hover:text-[var(--accent-text)]"
+                className="mt-1 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(210,176,184,0.18)] bg-[var(--surface-soft)] text-[var(--accent-text)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[rgba(255,239,245,0.92)]"
                 title="Kembali ke dashboard"
               >
                 <ArrowLeft className="h-5 w-5" />
@@ -122,7 +122,7 @@ export default function AppWorkspaceShell({
                         : "border-[rgba(210,176,184,0.16)] bg-[var(--surface-soft)] text-[var(--muted)] hover:border-[rgba(216,142,165,0.24)] hover:bg-[rgba(255,239,245,0.92)]"
                     }`}
                   >
-                    <ItemIcon className="h-4 w-4" />
+                    <ItemIcon className="h-4 w-4 text-[var(--accent-text)]" />
                     {item.label}
                   </Link>
                 )
