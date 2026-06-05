@@ -192,7 +192,7 @@ export default function Dashboard() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/history"
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-ink)] px-5 py-3 text-sm font-semibold text-[#fff8f4] shadow-[0_10px_30px_rgba(94,73,81,0.22)] hover:-translate-y-0.5 hover:bg-[var(--accent-ink-hover)]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#fff8f4] shadow-[0_10px_30px_rgba(216,142,165,0.28)] hover:-translate-y-0.5 hover:bg-[#cc7a95]"
                 >
                   <History className="h-4 w-4" />
                   Buka History
